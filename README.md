@@ -1,60 +1,344 @@
-# CodeIgniter 4 Framework
+# HMS_v1 — Hotel Management System
 
-## What is CodeIgniter?
+Repository ini berisi source code aplikasi **Hotel Management System** berbasis **CodeIgniter 4**.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Repository ini menggunakan workflow **branch per developer**, dimana:
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+* `master` → branch utama (stable)
+* setiap developer memiliki branch sendiri
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Contoh struktur branch:
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+```
+master
+ryanzulmi
+namateman
+```
 
-## Important Change with index.php
+Developer **tidak boleh langsung commit ke master**.
+Semua perubahan dilakukan di branch masing-masing.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+# 1. Prasyarat
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Pastikan sudah terinstall:
 
-## Repository Management
+* Git
+* PHP (minimal sesuai kebutuhan CodeIgniter)
+* Composer
+* Web server (XAMPP / Laragon / dll)
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+Cek instalasi:
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+```
+git --version
+php -v
+composer -V
+```
 
-## Contributing
+---
 
-We welcome contributions from the community.
+# 2. Clone Repository
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+Clone repository ke komputer lokal:
 
-## Server Requirements
+```
+git clone https://github.com/ryanzulmi/HMS_v1.git
+```
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+Masuk ke folder project:
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+```
+cd HMS_v1
+```
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+Cek branch:
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+```
+git branch -a
+```
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Biasanya akan terlihat:
+
+```
+* master
+remotes/origin/master
+```
+
+---
+
+# 3. Install Dependency
+
+Jika project menggunakan **Composer**:
+
+```
+composer install
+```
+
+---
+
+# 4. Setup Environment
+
+Copy file `.env`:
+
+```
+cp env .env
+```
+
+atau di Windows:
+
+```
+copy env .env
+```
+
+Edit konfigurasi database di `.env`.
+
+Contoh:
+
+```
+database.default.hostname = localhost
+database.default.database = hms_db
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+```
+
+---
+
+# 5. Menjalankan Project
+
+Jalankan server development:
+
+```
+php spark serve
+```
+
+Akses di browser:
+
+```
+http://localhost:8080
+```
+
+---
+
+# 6. Membuat Branch Developer
+
+Setiap developer harus membuat branch sendiri.
+
+Contoh developer **Ryan**:
+
+```
+git checkout -b ryanzulmi
+```
+
+Push branch ke GitHub:
+
+```
+git push -u origin ryanzulmi
+```
+
+Developer lain misalnya **Andi**:
+
+```
+git checkout -b andi
+git push -u origin andi
+```
+
+Sekarang branch akan muncul di GitHub:
+
+```
+master
+ryanzulmi
+andi
+```
+
+---
+
+# 7. Workflow Development
+
+Sebelum mulai coding **WAJIB update master terlebih dahulu**.
+
+```
+git checkout master
+git pull origin master
+```
+
+Masuk ke branch sendiri:
+
+```
+git checkout ryanzulmi
+```
+
+Update branch dengan master:
+
+```
+git merge master
+```
+
+Sekarang branch sudah mengikuti update terbaru.
+
+---
+
+# 8. Melakukan Perubahan Kode
+
+Setelah melakukan perubahan:
+
+```
+git add .
+git commit -m "menambahkan fitur booking"
+```
+
+Push ke branch sendiri:
+
+```
+git push
+```
+
+---
+
+# 9. Merge ke Master (via GitHub — Recommended)
+
+Jika fitur sudah selesai:
+
+1. Buka repository di GitHub
+2. Klik **Pull Requests**
+3. Klik **New Pull Request**
+
+Pilih:
+
+```
+base: master
+compare: ryanzulmi
+```
+
+Klik:
+
+```
+Create Pull Request
+```
+
+Setelah direview:
+
+```
+Merge Pull Request
+```
+
+---
+
+# 10. Merge via Bash (Alternatif)
+
+Jika ingin merge via command line:
+
+```
+git checkout master
+git pull origin master
+git merge ryanzulmi
+git push origin master
+```
+
+---
+
+# 11. Update Repository Setelah Merge
+
+Setelah merge ke master, semua developer harus update:
+
+```
+git checkout master
+git pull origin master
+```
+
+Kemudian update branch masing-masing:
+
+```
+git checkout ryanzulmi
+git merge master
+```
+
+---
+
+# 12. Aturan Development
+
+Developer **tidak diperbolehkan**:
+
+* commit langsung ke `master`
+* push langsung ke `master`
+
+Developer **harus**:
+
+* membuat branch sendiri
+* pull master sebelum coding
+* push ke branch sendiri
+* merge ke master melalui Pull Request
+
+---
+
+# 13. File yang Tidak Masuk Repository
+
+File berikut tidak ikut di Git:
+
+```
+/vendor
+/writable/cache
+/writable/logs
+.env
+```
+
+Pastikan file tersebut ada di `.gitignore`.
+
+---
+
+# 14. Perintah Git yang Sering Digunakan
+
+Update master:
+
+```
+git checkout master
+git pull origin master
+```
+
+Masuk branch developer:
+
+```
+git checkout namabranch
+```
+
+Commit perubahan:
+
+```
+git add .
+git commit -m "update fitur"
+```
+
+Push perubahan:
+
+```
+git push
+```
+
+---
+
+# 15. Struktur Branch
+
+Workflow repository:
+
+```
+           master
+             │
+     ┌───────┴────────┐
+     │                │
+   ryanzulmi       temansaya
+     │                │
+   coding           coding
+     │                │
+     └──────merge─────┘
+             │
+           master
+```
+
+---
+
+# Author
+
+Ryan Zulmi
+Project: HMS_v1 (Hotel Management System)
