@@ -1,0 +1,5 @@
+/writable/cache/*
+/writable/logs/*
+.env
+.DS_Store
+Thumbs.db
