@@ -7,12 +7,12 @@
     <div class="d-flex align-items-end row">
       <div class="col-sm-7">
         <div class="card-body">
-          <h5 class="card-title text-primary">Wellcome to HMS</h5>
+          <h5 class="card-title text-primary">Welcome to HMS</h5>
           <p class="mb-4">
-            Welcome to HMS, a hotel management system that helps you manage your hotel bookings, guests,
+            Hotel management system that helps you manage your hotel bookings, guests,
             and assets.
           </p>
-          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+          <a href="javascript:;" class="btn btn-sm btn-outline-primary">New Booking</a>
         </div>
       </div>
       <div class="col-sm-5 text-center text-sm-left">
