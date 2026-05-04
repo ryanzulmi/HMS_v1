@@ -192,7 +192,7 @@ git commit -m "menambahkan fitur booking"
 Push ke branch sendiri:
 
 ```
-git push
+git push -u origin andi
 ```
 
 ---
