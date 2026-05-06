@@ -61,6 +61,7 @@
                             <p class="mb-4">Please sign-in first</p>
                         </div>
                         <form id="formAuthentication" class="mb-3" action="<?= base_url('login') ?>" method="POST">
+                            <?= csrf_field(); ?>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input
